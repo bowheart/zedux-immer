@@ -47,7 +47,7 @@ To learn comprehensively, check out the [tests](https://github.com/bowheart/zedu
 
 ## Method API
 
-ZeduxImmer exposes just two methods:
+ZeduxImmer exposes just two functions:
 
 - `immerizeReactor()` &ndash; wraps an existing reactor.
 - `immutablyReact()` &ndash; creates a new, immutable reactor.
@@ -56,7 +56,7 @@ Let's look at each of these in more detail:
 
 ### `immerizeReactor()`
 
-Wraps an existing [reactor](https://bowheart.github.io/zedux/docs/types/Reactor.html) in an immer [producer](https://github.com/mweststrate/immer#currying).
+Wraps an existing [reactor](https://bowheart.github.io/zedux/docs/types/Reactor) in an immer [producer](https://github.com/mweststrate/immer#currying).
 
 This is just a higher-order reactor. Its reducer layer will pass the Immer draft on to the wrapped reactor. Its processor layer is transparent.
 
@@ -111,11 +111,13 @@ At a high level:
 import { act } from 'zedux'
 import { immutablyReact } from 'zedux-immer'
 
+// Create an actor
 const increment = act('increment')
 
+// Create an immutable reactor
 const counterReactor = immutablyReact({ counter: 0 })
   .to(increment)
-  .withReducers(state => state.counter++)
+  .withReducers(state => state.counter++) // a mutation >:)
 ```
 
 Here's the above `immerizeReactor()` example using `immutablyReact()`
@@ -127,7 +129,7 @@ import { act, createStore } from 'zedux'
 // Create an actor
 const addTodo = act('addTodo')
 
-// Create an immutable reactor (note the mutation! :O)
+// Create an immutable reactor (as always, note the mutation)
 const todosReactor = immutablyReact([])
   .to(addTodo)
   .withReducers((todos, newTodo) => todos.push(newTodo))
@@ -141,12 +143,35 @@ todosStore.dispatch(addTodo('totally rock'))
 todosStore.dispatch(addTodo('totally rock again'))
 ```
 
+## Exploring further
+
+Curried Immer producers can be used directly as Zedux [inducers](https://bowheart.github.io/zedux/docs/types/Inducer):
+
+```javascript
+import produce from 'immer'
+import { createStore } from 'zedux'
+
+// Create the store and hydrate its initial state
+const store = createStore()
+  .hydrate({ counter: 0 })
+
+// Create some Immerized inducers
+const increment = produce(state => state.counter++)
+const decrement = produce(state => state.counter--)
+
+store.dispatch(increment)
+store.dispatch(increment)
+store.dispatch(decrement)
+
+store.getState() // 1
+```
+
 ## Contributing
 
 All contributions are welcome. Just jump right in. Open an issue. PRs, just keep the coding style consistent and the tests at 100% (branches, functions, lines, everything 100%, plz). Be sure to run `npm run lint` and `npm test`. Happy coding!
 
-Bugs can be submitted to https://github.com/bowheart/zedux/issues
+Bugs can be submitted to https://github.com/bowheart/zedux-immer/issues
 
 ## License
 
-The MIT License.
+The [MIT License](https://github.com/bowheart/zedux-immer/blob/master/LICENSE.md).
