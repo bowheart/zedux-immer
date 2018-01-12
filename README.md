@@ -37,6 +37,14 @@ Or include the appropriate unpkg build on your page:
 <script src="https://unpkg.com/zedux-immer/dist/zedux-immer.min.js"></script>
 ```
 
+## Getting started
+
+Well, there's not much to it. The entire documentation is contained in this readme.
+
+To learn by getting dirty, you can poke around [this codepen](https://codepen.io/bowheart/pen/Gydyor?editors=0010).
+
+To learn comprehensively, check out the [tests](https://github.com/bowheart/zedux-immer/tree/master/test).
+
 ## Method API
 
 ZeduxImmer exposes just two methods:
