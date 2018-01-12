@@ -143,7 +143,7 @@ todosStore.dispatch(addTodo('totally rock again'))
 
 ## Contributing
 
-All contributions are welcome. Just jump right in. Open an issue. PRs, just keep the coding style consistent and the tests at 100% (branches, functions, lines, everything 100%, plz). Be sure to run `npm lint` and `npm test`. Happy coding!
+All contributions are welcome. Just jump right in. Open an issue. PRs, just keep the coding style consistent and the tests at 100% (branches, functions, lines, everything 100%, plz). Be sure to run `npm run lint` and `npm test`. Happy coding!
 
 Bugs can be submitted to https://github.com/bowheart/zedux/issues
 

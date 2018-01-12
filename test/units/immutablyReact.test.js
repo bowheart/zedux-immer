@@ -44,18 +44,18 @@ describe('immutablyReact()', () => {
 
   test('nested mutation, just for fun', () => {
 
-    const reactor = immutablyReact({
-        a: {
-          b: [ 1 ],
-          c: {
-            d: 2
-          }
+    const initialState = {
+      a: {
+        b: [ 1 ],
+        c: {
+          d: 2
         }
-      })
+      }
+    }
+    const reactor = immutablyReact(initialState)
       .to('a')
       .withReducers(state => state.a.b.push(1))
 
-    const initialState = reactor(undefined, { type: 'init' })
     const newState = reactor(initialState, { type: 'a' })
 
     expect(newState).not.toBe(initialState)

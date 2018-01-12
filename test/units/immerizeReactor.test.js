@@ -5,7 +5,7 @@ describe('immerizeReactor()', () => {
 
   test('does nothing and returns the original reactor if the initial state is not an object or array', () => {
 
-    const reactor = (state = 1, action) => state
+    const reactor = (state = 1) => state
 
     const immerizedReactor = immerizeReactor(reactor)
 
