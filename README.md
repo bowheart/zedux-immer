@@ -1,3 +1,7 @@
+# [DEPRECATED]
+
+This repo has moved to [`Omnistac/zedux`](https://github.com/omnistac/zedux) - specifically the [`immer` package](https://github.com/omnistac/zedux/tree/master/packages/immer).
+
 # Zedux Immer
 
 [![Build Status](https://travis-ci.org/bowheart/zedux-immer.svg?branch=master)](https://travis-ci.org/bowheart/zedux-immer)
@@ -89,8 +93,7 @@ const todosReactor = react([])
 const immerizedTodosReactor = immerizeReactor(todosReactor)
 
 // Create the store
-const todosStore = createStore()
-  .use(immerizedTodosReactor)
+const todosStore = createStore().use(immerizedTodosReactor)
 
 // And have a blast
 todosStore.dispatch(addTodo('totally rock'))
@@ -135,8 +138,7 @@ const todosReactor = immutablyReact([])
   .withReducers((todos, newTodo) => todos.push(newTodo))
 
 // Create the store
-const todosStore = createStore()
-  .use(immerizedTodosReactor)
+const todosStore = createStore().use(immerizedTodosReactor)
 
 // And have a blast
 todosStore.dispatch(addTodo('totally rock'))
@@ -152,8 +154,7 @@ import produce from 'immer'
 import { createStore } from 'zedux'
 
 // Create the store and hydrate its initial state
-const store = createStore()
-  .hydrate({ counter: 0 })
+const store = createStore().hydrate({ counter: 0 })
 
 // Create some Immerized inducers
 const increment = produce(state => state.counter++)
